@@ -26,4 +26,19 @@ router.post('/', (req, res, next)=>{
     res.status(200).json(newElement);
 }); // post /
 
+router.put('/:idElemento', (req, res, next)=>{
+    var id = parseInt(req.params.idElemento);
+    var update = req.body;
+    var modifiedObject = {};
+    var originalObject = {};
+    thingsCollection = thingsCollection.map((e, i)=>{
+        if (e.id === id){
+            originalObject = Object.assign({}, e);
+            return Object.assign(modifiedObject, e, req.body);
+        }
+        return e;
+    });//map
+    res.status(200).json({"o": originalObject, "m": modifiedObject});
+}) // put /
+
 module.exports = router;
