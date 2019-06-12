@@ -41,4 +41,12 @@ router.put('/:idElemento', (req, res, next)=>{
     res.status(200).json({"o": originalObject, "m": modifiedObject});
 }) // put /
 
+router.delete('/:id', (req, res, next)=>{
+    var id = parseInt(req.params.id);
+    thingsCollection = thingsCollection.filter((e, i)=>{
+        return (e.id !== id);
+    }); //
+    res.status(200).json({'msg': 'Receta ' + id + ' fue eliminado con éxito.'});
+}); // delete /
+
 module.exports = router;
